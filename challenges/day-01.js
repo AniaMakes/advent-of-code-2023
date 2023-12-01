@@ -1016,27 +1016,28 @@ const getNumbers = (arrayOfItems) => {
 }
 
 const getNumbersWithWords = (arrayOfItems) => {
-	const getNumberRegex = /(one)|(two)|(three)|(four)|(five)|(six)|(seven)|(eight)|(nine)|\d/gm; 
+	const getNumberRegex = /(?=(one))|(?=(two))|(?=(three))|(?=(four))|(?=(five))|(?=(six))|(?=(seven))|(?=(eight))|(?=(nine))|\d/gm; 
 	const output = arrayOfItems.map(function(item){
 		const array = [...item.matchAll(getNumberRegex)];
 		const firstItem = array[0];
 		const lastItem = array[array.length - 1];
-		const firstNumber = firstItem[0];
-		const lastNumber = lastItem[0];
+		const firstNumber = findNumberInArray(firstItem);
+		const lastNumber = findNumberInArray(lastItem);
 		const firstNumberDigitString = checkForNumberWord(firstNumber);
 		const lastNumberDigitString = checkForNumberWord(lastNumber);
 		const neededNumberString = firstNumberDigitString + lastNumberDigitString;
-		// console.log('================')
-		// console.log("item", item);
-		// console.log("firstNumber", firstNumber);
-		// console.log("lastNumber", lastNumber);
-		// console.log("firstNumberDigitString", firstNumberDigitString);
-		// console.log("lastNumberDigitString", lastNumberDigitString);
-		// console.log("neededNumberString", neededNumberString);
-		// console.log('================')
 		return Number(neededNumberString)
 	})
 	return output;
+}
+
+const findNumberInArray = (array) => {
+	const filteredNumber = array.filter(item => item === "1" || item === "2" || item === "3" || item === "4" || item === "5" || item === "6" || item === "7" || item === "8" || item === "9" )
+
+	const filteredWord = array.filter(item => 
+		item === "one" || item === "two" || item === "three" || item === "four" || item === "five" || item === "six" || item === "seven" || item === "eight" || item === "nine" )
+
+	return filteredWord.toString() || filteredNumber.toString()
 }
 
 const checkForNumberWord = (word) => {
@@ -1071,9 +1072,6 @@ const sumOf = (arrayOfNumbers) => {
 
 const execute = (arrayOfItems) => {
 	const numberArray = getNumbersWithWords(arrayOfItems);
-	// console.log('================')
-	// console.dir(numberArray, {'maxArrayLength': null});
-	// console.log('================')
 	const sum = sumOf(numberArray);
 	console.log('================')
 	console.log("sum",sum);
@@ -1085,7 +1083,7 @@ execute(input)
 
 // First answer: 54968
 
-// Second answer: 54110 - too high
+// Second answer: 54094
 
 module.exports = {
 	checkForNumberWord,

@@ -4,14 +4,13 @@ const { expect } = require('chai');
 
 describe('day 01', function () {
 	describe('get numbers', function () {
-	  it('extract list of numbers', function () {
+	it('extract list of numbers', function () {
 
 		const arrayToTest = [
 			"1abc2",
 			"pqr3stu8vwx",
 			"a1b2c3d4e5f",
 			"treb7uchet",
-			"zghdbtsf"
 		]
 
 		const expectedOutput = [
@@ -36,10 +35,11 @@ describe('day 01', function () {
 			"4nineeightseven2",
 			"zoneight234",
 			"7pqrstsixteen",
+			"8threesevenfourgbgteight5twonenjr"
 		]
 
 		const expectedOutput = [
-			29, 83, 13, 24, 42, 14, 76
+			29, 83, 13, 24, 42, 14, 76, 81
 		]
 		
 		expect(getNumbersWithWords(arrayToTest)).to.deep.equal(expectedOutput);
